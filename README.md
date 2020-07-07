@@ -1,14 +1,33 @@
-# Welcome to your CDK TypeScript project!
+# Node vs Deno runtime tester
 
-This is a blank project for TypeScript development with CDK.
+This is a small CDK module that creates infrastructure in AWS to test Node vs Deno performance in Lambda functions.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Pre-req's
 
-## Useful commands
+You'll need to install [this](https://github.com/hayd/deno-lambda) Lambda layer and provide the resulting ARN in the 
+next step.
 
- * `npm run build`   compile typescript to js
- * `npm run watch`   watch for changes and compile
- * `npm run test`    perform the jest unit tests
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk synth`       emits the synthesized CloudFormation template
+## To Run
+
+```shell script
+$ npm i
+$ npm run build:deno
+$ npm run cdk deploy -c denoLambdaLayer=arn:aws:lambda:us-east-1:1234567890123:layer:deno:1"
+```
+
+Invoke the Lambda provided by the Output of the stack, providing an event that follows this shape:
+
+```json
+{
+  "timeToRun": 5000,
+  "delay": 100
+}
+```
+
+Where timeToRun and delay are both expressed in milliseconds. In the example, the Node and Deno Lambda function will
+each be called every 100ms for 5 seconds (for a total of 50 times each). Be mindful that if you make the rate too fast
+you risk running over your provisioned throughput on the DynamoDB table.
+
+## The Blog
+
+Read more about this at [my blog]().
