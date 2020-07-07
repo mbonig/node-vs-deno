@@ -30,4 +30,4 @@ you risk running over your provisioned throughput on the DynamoDB table.
 
 ## The Blog
 
-Read more about this at [my blog]().
+Read more about this at [my blog](https://matthewbonig.com/2020/07/05/deno-vs-node/).
