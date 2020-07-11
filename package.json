@@ -9,7 +9,8 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "build:deno": "cd lib/handlers/deno; DENO_DIR=.deno_dir deno cache deno.ts"
+    "build:deno": "cd lib/handlers/deno; DENO_DIR=.deno_dir deno cache deno.ts",
+    "build:deno:remap": "cd lib/handlers/deno; cp -R .deno_dir/gen/file/$PWD/ .deno_dir/LAMBDA_TASK_ROOT"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.48.0",

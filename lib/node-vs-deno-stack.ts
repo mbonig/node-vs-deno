@@ -2,7 +2,7 @@ import { CfnOutput, Construct, Duration, Stack, StackProps } from "@aws-cdk/core
 import { AssetCode, Code, Function, LayerVersion, Runtime } from "@aws-cdk/aws-lambda";
 import { AttributeType, BillingMode, Table } from "@aws-cdk/aws-dynamodb";
 import { Dashboard, GraphWidget, Metric, MetricProps, SingleValueWidget } from "@aws-cdk/aws-cloudwatch";
-
+import * as path from 'path';
 export interface NodeVsDenoStackProps extends StackProps{
   denoLambdaLayer: string;
 }
@@ -44,8 +44,8 @@ export class NodeVsDenoStack extends Stack {
 
   private createDenoLambda() {
     this.denoLambda = new Function(this, 'deno', {
-      code: Code.fromAsset(__dirname + "/handlers"),
-      handler: "deno/deno.handler",
+      code: Code.fromAsset(path.join(__dirname,"handlers","deno")),
+      handler: "deno.handler",
       runtime: Runtime.PROVIDED,
       memorySize: 1024,
       environment: {

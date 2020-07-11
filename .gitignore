@@ -11,4 +11,10 @@ cdk.out
 .cache
 .build
 
+# Jetbrains
+.idea/
+
+# Deno compiled
+lib/handlers/deno/.deno_dir
+
 !lib/handlers/**/*.js
